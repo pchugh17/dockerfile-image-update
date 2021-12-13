@@ -169,7 +169,7 @@ public class AllTest {
         Mockito.verify(dockerfileGitHubUtil, times(0))
                 .tryRetrievingContent(eq(forkedRepo), anyString(), anyString());
         Mockito.verify(dockerfileGitHubUtil, times(0))
-                .modifyOnGithub(any(), anyString(), anyString(), anyString(), anyString());
+                .modifyOnGithub(any(), anyString(), anyString(), anyString(), anyString(), anyString());
         Mockito.verify(dockerfileGitHubUtil, times(0))
                 .createPullReq(eq(parentRepo), anyString(), eq(forkedRepo), any());
     }
@@ -192,7 +192,7 @@ public class AllTest {
         Mockito.verify(dockerfileGitHubUtil, times(0)).tryRetrievingContent(any(),
                 anyString(), anyString());
         Mockito.verify(dockerfileGitHubUtil, times(0))
-                .modifyOnGithub(any(), anyString(), anyString(), anyString(), anyString());
+                .modifyOnGithub(any(), anyString(), anyString(), anyString(), anyString(), anyString());
         Mockito.verify(dockerfileGitHubUtil, times(0)).createPullReq(any(), anyString(), any(), any());
 
     }
@@ -247,7 +247,7 @@ public class AllTest {
         Mockito.verify(dockerfileGitHubUtil, times(1)).tryRetrievingContent(eq(forkedRepo),
                 eq("df2"), eq("branch"));
         Mockito.verify(dockerfileGitHubUtil, times(1))
-                .modifyOnGithub(any(), eq("branch"), eq("image2"), eq("tag2"), anyString());
+                .modifyOnGithub(any(), eq("branch"), eq("image2"), eq("tag2"), anyString(), anyString());
         Mockito.verify(dockerfileGitHubUtil, times(1)).createPullReq(eq(parentRepo),
                 eq("branch"), eq(forkedRepo), any());
     }
@@ -313,9 +313,9 @@ public class AllTest {
 
         // Both Dockerfiles modified
         Mockito.verify(dockerfileGitHubUtil, times(1))
-                .modifyOnGithub(any(), eq("branch"), eq("image11"), eq("tag11"), anyString());
+                .modifyOnGithub(any(), eq("branch"), eq("image11"), eq("tag11"), anyString(), anyString());
         Mockito.verify(dockerfileGitHubUtil, times(1))
-                .modifyOnGithub(any(), eq("branch"), eq("image12"), eq("tag12"), anyString());
+                .modifyOnGithub(any(), eq("branch"), eq("image12"), eq("tag12"), anyString(), anyString());
 
         // Only one PR created on the repo with changes to both Dockerfiles.
         Mockito.verify(dockerfileGitHubUtil, times(1)).createPullReq(eq(parentRepo),
@@ -371,7 +371,7 @@ public class AllTest {
 
         // missing Dockerfile, so skipping modify and create PR
         Mockito.verify(dockerfileGitHubUtil, times(0))
-                .modifyOnGithub(any(), anyString(), anyString(), anyString(), anyString());
+                .modifyOnGithub(any(), anyString(), anyString(), anyString(), anyString(), anyString());
         Mockito.verify(dockerfileGitHubUtil, times(0)).createPullReq(eq(parentRepo),
                 anyString(), eq(forkedRepo), any());
     }
