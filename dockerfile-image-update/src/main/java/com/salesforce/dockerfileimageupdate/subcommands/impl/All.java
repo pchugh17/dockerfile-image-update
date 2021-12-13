@@ -255,7 +255,7 @@ public class All implements ExecutableWithNamespace {
                 log.info("No Dockerfile found at path: '{}'", pathToDockerfile);
             } else {
                 dockerfileGitHubUtil.modifyOnGithub(content, branch, image, tag,
-                        ns.get(Constants.GIT_ADDITIONAL_COMMIT_MESSAGE));
+                        ns.get(Constants.GIT_ADDITIONAL_COMMIT_MESSAGE), ns.get(Constants.TAGS_TO_IGNORE));
                 isContentModified = true;
                 isRepoSkipped = false;
             }

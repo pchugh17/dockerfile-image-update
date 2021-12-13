@@ -55,7 +55,7 @@ public class Child implements ExecutableWithNamespace {
         dockerfileGitHubUtil.createOrUpdateForkBranchToParentDefault(repo, fork, gitForkBranch);
 
         log.info("Modifying on Github...");
-        dockerfileGitHubUtil.modifyAllOnGithub(fork, gitForkBranch.getBranchName(), img, forceTag);
+        dockerfileGitHubUtil.modifyAllOnGithub(fork, gitForkBranch.getBranchName(), img, forceTag, ns.get(Constants.TAGS_TO_IGNORE));
         dockerfileGitHubUtil.createPullReq(repo,
                 gitForkBranch.getBranchName(),
                 fork,
