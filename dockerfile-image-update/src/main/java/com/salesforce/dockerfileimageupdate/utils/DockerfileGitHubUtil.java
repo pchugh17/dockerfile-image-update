@@ -307,7 +307,8 @@ public class DockerfileGitHubUtil {
         // Only check/modify lines which contain a FROM instruction
         if (FromInstruction.isFromInstruction(line)) {
             FromInstruction fromInstruction = new FromInstruction(line);
-            Pattern excludePattern = tagsToIgnore == null ? null : Pattern.compile(tagsToIgnore);
+            log.debug("Tags ignore regex is : {}", tagsToIgnore);
+            Pattern excludePattern = (tagsToIgnore != null && !tagsToIgnore.isEmpty()) ? Pattern.compile(tagsToIgnore) : null;
 
             if (fromInstruction.hasBaseImage(imageToFind) &&
                     fromInstruction.hasADifferentTag(tag)) {
@@ -315,8 +316,8 @@ public class DockerfileGitHubUtil {
                     fromInstruction = fromInstruction.getFromInstructionWithNewTag(tag);
                     modified = true;
                 } else
-                    log.info("Skipping Dockerfile change as image tag ({}) matches the tag excludes regex",
-                            fromInstruction.getTag());
+                    log.info("Skipping Dockerfile change as image tag ({}) matches the tag excludes regex ({})",
+                            fromInstruction.getTag(), tagsToIgnore);
             }
             outputLine = fromInstruction.toString();
         }
