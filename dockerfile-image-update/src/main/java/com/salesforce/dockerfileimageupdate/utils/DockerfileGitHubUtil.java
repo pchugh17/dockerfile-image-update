@@ -471,7 +471,7 @@ public class DockerfileGitHubUtil {
                 log.info("No Dockerfile found at path: '{}'", pathToDockerfile);
             } else {
                 modifyOnGithub(content, gitForkBranch.getBranchName(), gitForkBranch.getImageName(), gitForkBranch.getImageTag(),
-                        ns.get(Constants.GIT_ADDITIONAL_COMMIT_MESSAGE));
+                        ns.get(Constants.GIT_ADDITIONAL_COMMIT_MESSAGE), "");
                 isContentModified = true;
                 isRepoSkipped = false;
             }

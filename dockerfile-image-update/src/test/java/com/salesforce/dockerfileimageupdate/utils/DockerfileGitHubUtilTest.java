@@ -782,7 +782,7 @@ public class DockerfileGitHubUtilTest {
         when(gitHubUtil.tryRetrievingContent(eq(forkedRepo),
                 eq("df12"), eq("image-tag"))).thenReturn(forkedRepoContent2);
         doNothing().when(dockerfileGitHubUtil).modifyOnGithub(any(), eq("image-tag"), eq("image")
-                , eq("tag"), anyString());
+                , eq("tag"), anyString(), eq(""));
 
         dockerfileGitHubUtil.changeDockerfiles(ns, pathToDockerfilesInParentRepo,
                 new GitHubContentToProcess(forkedRepo, parentRepo, ""), new ArrayList<>(), gitForkBranch);
@@ -795,7 +795,7 @@ public class DockerfileGitHubUtilTest {
 
         // Both Dockerfiles modified
         verify(dockerfileGitHubUtil, times(2))
-                .modifyOnGithub(any(), eq("image-tag"), eq("image"), eq("tag"), anyString());
+                .modifyOnGithub(any(), eq("image-tag"), eq("image"), eq("tag"), anyString(), eq(""));
 
         // Only one PR created on the repo with changes to both Dockerfiles.
         verify(dockerfileGitHubUtil, times(1)).createPullReq(eq(parentRepo),
