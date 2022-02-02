@@ -80,6 +80,10 @@ public class CommandLine {
                 .help("regex of Docker image tags to ignore from pull request generation");
         parser.addArgument("-B")
                 .help("additional body text to include in pull requests");
+        parser.addArgument("-s", "--" + Constants.SKIP_PR_CREATION)
+                .type(Boolean.class)
+                .setDefault(false)
+                .help("Only update image tag store. Skip creating PRs");
         return parser;
     }
 
